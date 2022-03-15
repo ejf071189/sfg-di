@@ -1,11 +1,11 @@
 package guru.springframework.sfgdi.services;
 
-import org.springframework.stereotype.Service;
-
-@Service
-public class ConstructorInjectedGreetingService implements GreetingService{
-  @Override
-  public String sayGreeting() {
-    return "Hello World - Constructor";
-  }
+/**
+ * Created by jt on 12/26/19.
+ */
+public class ConstructorInjectedGreetingService implements GreetingService {
+    @Override
+    public String sayGreeting() {
+        return "Hello World - Constructor";
+    }
 }
