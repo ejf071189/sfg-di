@@ -7,5 +7,4 @@ public class EnglishGreetingRepositoryImpl implements EnglishGreetingRepository 
     // TODO Auto-generated method stub
     return null;
   }
-  
 }

@@ -8,6 +8,10 @@ import guru.springframework.sfgdi.services.I18NSpanishService;
 import guru.springframework.sfgdi.services.PropertyInjectedGreetingService;
 import guru.springframework.sfgdi.services.SetterInjectedGreetingService;
 import guru.springframework.sfgdi.services.PrimaryGreetingService;
+
+import com.springframework.pets.PetService;
+import com.springframework.pets.PetServiceFactory;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -20,11 +24,28 @@ import org.springframework.context.annotation.Profile;
 public class GreetingServiceConfig {
 
   @Bean
+  PetServiceFactory petServieFactory(){
+    return new PetServiceFactory();
+  }
+
+  @Profile({"dog", "default"})
+  @Bean
+  PetService dogPetService(PetServiceFactory petServiceFactory) {
+    return petServiceFactory.getPetService("dog");
+  }
+
+  @Profile("cat")
+  @Bean
+  PetService catPetService(PetServiceFactory petServiceFactory) {
+    return petServiceFactory.getPetService("cat");
+  }
+
+  @Bean
   EnglishGreetingRepository englishGreetingRepository() {
     return new EnglishGreetingRepositoryImpl();
   }
   
-  @Profile({"EN"})
+  @Profile("EN")
   @Bean("i18nService")
   I18NEnglishService i18NEnglishService(EnglishGreetingRepository englishGreetingRepository) {
     return new I18NEnglishService(englishGreetingRepository);
